@@ -29,10 +29,20 @@ function createSquare() {
 }
 
 function changeGridSize() {
-  let desiredGridSize = prompt("Please enter desired grid size (1-100)");
-  if (desiredGridSize) {
-    gridSize = Number(desiredGridSize);
+  let desiredGridSize = 0;
+  while (desiredGridSize < 1 || desiredGridSize > 100) {
+    const input = prompt("Please enter desired grid size (1-100)");
+    if (input !== null) {
+      const parsedInput = parseInt(input);
+      if (Number.isNaN(parsedInput) || parsedInput < 1 || parsedInput > 100) {
+        alert("Invalid input. Please enter a number between 1 and 100");
+      } else {
+        desiredGridSize = parsedInput;
+      }
+    }
   }
+  gridSize = desiredGridSize;
+
   while (container?.firstChild) {
     container.removeChild(container.firstChild);
   }
